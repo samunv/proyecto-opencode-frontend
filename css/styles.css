@@ -125,7 +125,7 @@ h1, h2, h3, h4, h5, h6 {
 /* Contenido Principal */
 .contenido-principal {
     max-width: 1200px;
-    margin: 0;
+    margin: 30px;
     padding: 0 var(--espaciado-2);
 }
 
