@@ -1,4 +1,10 @@
+/**
+ * Clase encargada de manipular el DOM y la interfaz de usuario
+ */
 export class InterfazUsuario {
+    /**
+     * Inicializa los elementos del DOM necesarios
+     */
     constructor() {
         this.cargador = document.getElementById('cargador');
         this.contenedorResultados = document.getElementById('contenedor-resultados');
@@ -7,7 +13,9 @@ export class InterfazUsuario {
         this._actualizarIconos();
     }
 
-    /** Muestra el spinner de carga (Obligatorio por regla de negocio) */
+    /**
+     * Muestra el spinner de carga (Obligatorio por regla de negocio)
+     */
     mostrarCargador() {
         if (this.estadoVacio) {
             this.estadoVacio.classList.add('oculto');
@@ -16,12 +24,16 @@ export class InterfazUsuario {
         this.ocultarMensaje();
     }
 
-    /** Oculta el spinner de carga */
+    /**
+     * Oculta el spinner de carga
+     */
     ocultarCargador() {
         this.cargador.classList.add('oculto');
     }
 
-    /** Vacía el contenedor de resultados actual */
+    /**
+     * Vacía el contenedor de resultados actual
+     */
     limpiarResultados() {
         this.contenedorResultados.innerHTML = '';
     }
@@ -33,12 +45,22 @@ export class InterfazUsuario {
      */
     mostrarMensaje(texto, esError = false) {
         const icono = esError ? 'alert-circle' : 'info';
-        this.contenedorMensajes.innerHTML = `<i data-lucide="${icono}"></i> <span>${texto}</span>`;
+        this.contenedorMensajes.innerHTML = '';
+        const iconElement = document.createElement('i');
+        iconElement.dataset.lucide = icono;
+        this.contenedorMensajes.appendChild(iconElement);
+        
+        const spanText = document.createElement('span');
+        spanText.textContent = texto;
+        this.contenedorMensajes.appendChild(spanText);
+
         this.contenedorMensajes.className = `mensaje ${esError ? 'error' : ''}`;
         this._actualizarIconos(this.contenedorMensajes);
     }
 
-    /** Oculta el contenedor de mensajes */
+    /**
+     * Oculta el contenedor de mensajes
+     */
     ocultarMensaje() {
         this.contenedorMensajes.classList.add('oculto');
     }
@@ -85,14 +107,36 @@ export class InterfazUsuario {
     _construirHTMLTarjeta(libro) {
         const div = document.createElement('article');
         div.className = 'tarjeta-libro';
-        
-        div.innerHTML = `
-            <img src="${libro.urlPortada}" alt="Portada de ${libro.titulo}" class="portada-libro" loading="lazy">
-            <h3 class="titulo-libro" title="${libro.titulo}">${libro.titulo}</h3>
-            <p class="autor-libro"><i data-lucide="user"></i> ${libro.autor}</p>
-            <span class="anio-libro"><i data-lucide="calendar"></i> ${libro.anioPublicacion}</span>
-        `;
-        
+
+        const img = document.createElement('img');
+        img.src = libro.urlPortada;
+        img.alt = `Portada de ${libro.titulo}`;
+        img.className = 'portada-libro';
+        img.loading = 'lazy';
+        div.appendChild(img);
+
+        const h3 = document.createElement('h3');
+        h3.className = 'titulo-libro';
+        h3.title = libro.titulo;
+        h3.textContent = libro.titulo;
+        div.appendChild(h3);
+
+        const pAutor = document.createElement('p');
+        pAutor.className = 'autor-libro';
+        const iconoAutor = document.createElement('i');
+        iconoAutor.dataset.lucide = 'user';
+        pAutor.appendChild(iconoAutor);
+        pAutor.appendChild(document.createTextNode(` ${libro.autor}`));
+        div.appendChild(pAutor);
+
+        const spanAnio = document.createElement('span');
+        spanAnio.className = 'anio-libro';
+        const iconoAnio = document.createElement('i');
+        iconoAnio.dataset.lucide = 'calendar';
+        spanAnio.appendChild(iconoAnio);
+        spanAnio.appendChild(document.createTextNode(` ${libro.anioPublicacion}`));
+        div.appendChild(spanAnio);
+
         return div;
     }
 

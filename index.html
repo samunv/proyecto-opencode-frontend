@@ -3,7 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Buscador de Libros</title>
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net https://unpkg.com; img-src 'self' https://covers.openlibrary.org https://via.placeholder.com; connect-src 'self' https://openlibrary.org; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com;">
+    <title>Buscador de Libros | Encuentra tu próxima lectura</title>
+    <meta name="description" content="Explora millones de títulos en nuestra base de datos literaria. Encuentra tus libros favoritos, descubre nuevos autores y crea tu biblioteca digital.">
+    <meta property="og:title" content="Buscador de Libros | Encuentra tu próxima lectura">
+    <meta property="og:description" content="Explora millones de títulos en nuestra base de datos literaria. Encuentra tus libros favoritos y descubre nuevos autores.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://via.placeholder.com/1200x630.png?text=Buscador+de+Libros">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;600;900&display=swap" rel="stylesheet">
@@ -15,16 +21,17 @@
 <body>
     <header class="cabecera">
         <div class="cabecera-contenedor">
-            <h1 class="titulo-principal"><i data-lucide="book-open"></i> Buscador de Libros</h1>
+            <h1 class="titulo-principal"><i data-lucide="book-open" aria-hidden="true"></i> Buscador de Libros</h1>
             <form id="formulario-busqueda" class="formulario">
+                <label for="input-busqueda" class="sr-only">Buscar por título o autor</label>
                 <input type="text" id="input-busqueda" class="input-busqueda" placeholder="Buscar por título, autor..." required>
-                <button type="submit" class="btn-buscar"><i data-lucide="search"></i> Buscar</button>
+                <button type="submit" class="btn-buscar"><i data-lucide="search" aria-hidden="true"></i> Buscar</button>
             </form>
         </div>
     </header>
 
     <main class="contenido-principal">
-        <section id="estado-vacio" class="estado-vacio">
+        <section id="estado-vacio" class="estado-vacio" aria-label="Bienvenida y características">
             <div class="swiper carrusel-inicio">
                 <div class="swiper-wrapper">
                     <div class="swiper-slide slide-carrusel">
@@ -79,9 +86,9 @@
             </div>
         </section>
 
-        <div id="cargador" class="cargador oculto"></div>
-        <div id="mensaje" class="mensaje oculto"></div>
-        <section id="contenedor-resultados" class="grid-resultados"></section>
+        <div id="cargador" class="cargador oculto" role="status" aria-label="Cargando resultados..."></div>
+        <div id="mensaje" class="mensaje oculto" role="alert" aria-live="assertive"></div>
+        <section id="contenedor-resultados" class="grid-resultados" aria-label="Resultados de búsqueda"></section>
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>

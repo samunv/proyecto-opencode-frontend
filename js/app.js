@@ -1,8 +1,14 @@
 import { ApiLibros } from './api.js';
 import { InterfazUsuario } from './ui.js';
-import { inicializarCarrusel } from './swiper-init.js';
+import { Carrusel } from './swiper-init.js';
 
+/**
+ * Clase principal que orquesta la aplicación
+ */
 class BuscadorApp {
+    /**
+     * Inicializa las dependencias y elementos del DOM
+     */
     constructor() {
         this.api = new ApiLibros();
         this.ui = new InterfazUsuario();
@@ -13,14 +19,16 @@ class BuscadorApp {
         this._manejarSubmit = this._manejarSubmit.bind(this);
     }
 
-    /** Inicializa los event listeners principales */
+    /**
+     * Inicializa los event listeners principales
+     */
     iniciar() {
         this.formulario.addEventListener('submit', this._manejarSubmit);
     }
 
     /**
      * Orquestador de la búsqueda (Manejador del submit)
-     * @param {Event} eventoSubmit
+     * @param {Event} eventoSubmit Evento del formulario
      */
     async _manejarSubmit(eventoSubmit) {
         eventoSubmit.preventDefault();
@@ -34,8 +42,8 @@ class BuscadorApp {
 
     /**
      * Valida que el término de búsqueda no esté vacío
-     * @param {string} termino
-     * @returns {boolean}
+     * @param {string} termino Texto a validar
+     * @returns {boolean} Verdadero si es válido
      */
     _validarEntrada(termino) {
         if (!termino) {
@@ -47,32 +55,35 @@ class BuscadorApp {
 
     /**
      * Flujo central de la aplicación (Orquestador API <-> UI)
-     * @param {string} termino
+     * @param {string} termino Texto a buscar
      */
     async _ejecutarBusqueda(termino) {
-        // 1. Preparar UI
-        this.ui.limpiarResultados();
-        this.ui.mostrarCargador();
-
+        this._prepararBusqueda();
         try {
-            // 2. Fetch datos (solo a través de API)
-            const librosEncontrados = await this.api.buscar(termino);
-            
-            // 3. Renderizar resultados (solo a través de UI)
-            this.ui.renderizarLibros(librosEncontrados);
-        } catch (errorAPI) {
-            // 4. Manejo de errores
-            this.ui.mostrarMensaje(errorAPI.message, true);
+            const libros = await this.api.buscar(termino);
+            this.ui.renderizarLibros(libros);
+        } catch (error) {
+            this.ui.mostrarMensaje(error.message, true);
         } finally {
-            // 5. Ocultar estado de carga (Obligatorio)
             this.ui.ocultarCargador();
         }
     }
+
+    /**
+     * Prepara la interfaz para una nueva búsqueda
+     */
+    _prepararBusqueda() {
+        this.ui.limpiarResultados();
+        this.ui.mostrarCargador();
+    }
 }
 
-// Punto de entrada de la aplicación
+/**
+ * Punto de entrada de la aplicación
+ */
 document.addEventListener('DOMContentLoaded', () => {
-    inicializarCarrusel();
+    const carrusel = new Carrusel();
+    carrusel.inicializar();
     const app = new BuscadorApp();
     app.iniciar();
 });

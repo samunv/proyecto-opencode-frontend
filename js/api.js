@@ -1,6 +1,9 @@
 import { URL_BUSQUEDA, LIMITE_RESULTADOS } from './config.js';
 import { Libro } from './types.js';
 
+/**
+ * Clase encargada de gestionar las peticiones a la API de OpenLibrary
+ */
 export class ApiLibros {
     /**
      * Realiza la búsqueda de libros en OpenLibrary
@@ -23,15 +26,15 @@ export class ApiLibros {
      * @returns {Promise<Object>} Promesa con JSON crudo
      */
     async _ejecutarFetch(termino) {
-        const queryNormalizado = encodeURIComponent(termino);
-        const urlFinal = `${URL_BUSQUEDA}?q=${queryNormalizado}&limit=${LIMITE_RESULTADOS}`;
-        const respuesta = await fetch(urlFinal);
-        
-        if (!respuesta.ok) {
-            throw new Error(`Fallo HTTP: ${respuesta.status}`);
+        try {
+            const queryNormalizado = encodeURIComponent(termino);
+            const urlFinal = `${URL_BUSQUEDA}?q=${queryNormalizado}&limit=${LIMITE_RESULTADOS}`;
+            const respuesta = await fetch(urlFinal);
+            if (!respuesta.ok) throw new Error(`Fallo HTTP: ${respuesta.status}`);
+            return await respuesta.json();
+        } catch (error) {
+            throw new Error(`Error de red: ${error.message}`);
         }
-        
-        return await respuesta.json();
     }
 
     /**

@@ -3,3 +3,16 @@
     --color-primary-glow: rgba(232, 201, 126, 0.2);
     --color-primary-gradient: linear-gradient(135deg, rgba(232, 201, 126, 0.15) 0%, rgba(232, 201, 126, 0.02) 100%);
 }
+
+/* Utilidad para accesibilidad (Screen Readers) */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}

@@ -6,17 +6,14 @@ import { URL_PORTADAS, PORTADA_POR_DEFECTO } from './config.js';
  * y manejable en español.
  */
 export class Libro {
+    /**
+     * Constructor de la clase Libro
+     * @param {Object} datosBrutos Datos crudos de la API
+     */
     constructor(datosBrutos) {
-        // Extraemos solo lo que necesitamos usando valores por defecto
         this.titulo = datosBrutos.title || 'Título desconocido';
-        
-        // El autor suele venir en un array, lo convertimos a string
         this.autor = this._formatearAutores(datosBrutos.author_name);
-        
-        // Año de la primera publicación
         this.anioPublicacion = datosBrutos.first_publish_year || 'Año desconocido';
-        
-        // Generamos la URL de la portada si tenemos el ID (cover_i)
         this.urlPortada = this._obtenerUrlPortada(datosBrutos.cover_i);
     }
 
