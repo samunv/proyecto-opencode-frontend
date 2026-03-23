@@ -7,7 +7,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;600;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="css/global.css">
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/components.css">
 </head>
 <body>
     <header class="cabecera">
@@ -21,11 +24,67 @@
     </header>
 
     <main class="contenido-principal">
+        <section id="estado-vacio" class="estado-vacio">
+            <div class="swiper carrusel-inicio">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide slide-carrusel">
+                        <div class="slide-contenido">
+                            <i data-lucide="book-heart" class="icono-slide" aria-hidden="true"></i>
+                            <h2 class="titulo-slide">Encuentra tus libros favoritos</h2>
+                            <p class="texto-slide">Explora millones de títulos en nuestra base de datos.</p>
+                        </div>
+                    </div>
+                    <div class="swiper-slide slide-carrusel">
+                        <div class="slide-contenido">
+                            <i data-lucide="compass" class="icono-slide" aria-hidden="true"></i>
+                            <h2 class="titulo-slide">Explora nuevos autores</h2>
+                            <p class="texto-slide">Descubre joyas literarias y amplía tus horizontes.</p>
+                        </div>
+                    </div>
+                    <div class="swiper-slide slide-carrusel">
+                        <div class="slide-contenido">
+                            <i data-lucide="library" class="icono-slide" aria-hidden="true"></i>
+                            <h2 class="titulo-slide">Tu biblioteca digital</h2>
+                            <p class="texto-slide">Toda la información que necesitas a un clic de distancia.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-pagination"></div>
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
+            </div>
+
+            <div class="cuadricula-caracteristicas">
+                <article class="caracteristica">
+                    <div class="icono-contenedor" aria-hidden="true">
+                        <i data-lucide="zap"></i>
+                    </div>
+                    <h3 class="titulo-caracteristica">Búsqueda rápida</h3>
+                    <p class="texto-caracteristica">Resultados instantáneos para que no pierdas tiempo.</p>
+                </article>
+                <article class="caracteristica">
+                    <div class="icono-contenedor" aria-hidden="true">
+                        <i data-lucide="database"></i>
+                    </div>
+                    <h3 class="titulo-caracteristica">Gran base de datos</h3>
+                    <p class="texto-caracteristica">Acceso a una extensa colección de libros de todo el mundo.</p>
+                </article>
+                <article class="caracteristica">
+                    <div class="icono-contenedor" aria-hidden="true">
+                        <i data-lucide="smartphone"></i>
+                    </div>
+                    <h3 class="titulo-caracteristica">Diseño responsivo</h3>
+                    <p class="texto-caracteristica">Disfruta de la mejor experiencia en cualquier dispositivo.</p>
+                </article>
+            </div>
+        </section>
+
         <div id="cargador" class="cargador oculto"></div>
         <div id="mensaje" class="mensaje oculto"></div>
         <section id="contenedor-resultados" class="grid-resultados"></section>
     </main>
 
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
     <script type="module" src="js/app.js"></script>
 </body>

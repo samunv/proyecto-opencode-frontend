@@ -1,5 +1,6 @@
 import { ApiLibros } from './api.js';
 import { InterfazUsuario } from './ui.js';
+import { inicializarCarrusel } from './swiper-init.js';
 
 class BuscadorApp {
     constructor() {
@@ -71,6 +72,7 @@ class BuscadorApp {
 
 // Punto de entrada de la aplicación
 document.addEventListener('DOMContentLoaded', () => {
+    inicializarCarrusel();
     const app = new BuscadorApp();
     app.iniciar();
 });

@@ -1,0 +1,5 @@
+:root {
+    --color-primary-alpha: rgba(232, 201, 126, 0.1);
+    --color-primary-glow: rgba(232, 201, 126, 0.2);
+    --color-primary-gradient: linear-gradient(135deg, rgba(232, 201, 126, 0.15) 0%, rgba(232, 201, 126, 0.02) 100%);
+}

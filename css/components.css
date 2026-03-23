@@ -1,0 +1,192 @@
+/* Estado Vacío */
+.estado-vacio {
+    display: flex;
+    flex-direction: column;
+    gap: var(--espaciado-6);
+    padding: var(--espaciado-6) var(--espaciado-2);
+    animation: fadeIn 0.5s ease-in-out;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Carrusel Swiper */
+.carrusel-inicio {
+    width: 100%;
+    border-radius: var(--radio-tarjeta);
+    overflow: hidden;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    box-shadow: var(--sombra-tarjeta), inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+    position: relative;
+}
+
+.slide-carrusel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 250px;
+    padding: var(--espaciado-4);
+    text-align: center;
+    background: linear-gradient(135deg, var(--color-surface) 0%, var(--color-bg) 100%);
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.slide-carrusel::before,
+.slide-carrusel::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+    z-index: -1;
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+.slide-carrusel::before {
+    width: 200px;
+    height: 200px;
+    background-color: var(--color-primary-alpha);
+    top: -50px;
+    left: -50px;
+}
+
+.slide-carrusel::after {
+    width: 150px;
+    height: 150px;
+    background-color: var(--color-primary-glow);
+    bottom: -50px;
+    right: -50px;
+}
+
+.slide-contenido {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--espaciado-2);
+    max-width: 500px;
+    position: relative;
+    z-index: 2;
+}
+
+.icono-slide {
+    width: 72px;
+    height: 72px;
+    color: var(--color-primary);
+    background: var(--color-primary-gradient);
+    border: 1px solid rgba(232, 201, 126, 0.2);
+    border-radius: 50%;
+    padding: var(--espaciado-2);
+    box-shadow: 0 0 20px var(--color-primary-alpha), inset 0 0 10px var(--color-primary-alpha);
+    margin-bottom: var(--espaciado-1);
+}
+
+.titulo-slide {
+    font-size: 1.5rem;
+    color: var(--color-text);
+    margin: 0;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.texto-slide {
+    font-size: 1rem;
+    color: var(--color-text-muted);
+    font-weight: 300;
+    margin: 0;
+}
+
+/* Personalización de Swiper */
+.swiper-pagination-bullet {
+    background-color: var(--color-text-muted) !important;
+}
+
+.swiper-pagination-bullet-active {
+    background-color: var(--color-primary) !important;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+    color: var(--color-primary) !important;
+}
+
+/* Cuadrícula de Características */
+.cuadricula-caracteristicas {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--espaciado-3);
+}
+
+.caracteristica {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radio-tarjeta);
+    padding: var(--espaciado-4);
+    text-align: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--espaciado-2);
+}
+
+.caracteristica:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--sombra-tarjeta);
+    background-color: var(--color-surface-hover);
+}
+
+.icono-contenedor {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-color: var(--color-primary-alpha);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-primary);
+    margin-bottom: var(--espaciado-1);
+}
+
+.icono-contenedor i {
+    width: 24px;
+    height: 24px;
+}
+
+.titulo-caracteristica {
+    font-size: 1.125rem;
+    color: var(--color-text);
+    margin: 0;
+}
+
+.texto-caracteristica {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+    font-weight: 300;
+    margin: 0;
+}
+
+/* Media Queries */
+@media (min-width: 768px) {
+    .slide-carrusel {
+        min-height: 320px;
+    }
+
+    .titulo-slide {
+        font-size: 2rem;
+    }
+
+    .texto-slide {
+        font-size: 1.125rem;
+    }
+
+    .cuadricula-caracteristicas {
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--espaciado-4);
+    }
+}

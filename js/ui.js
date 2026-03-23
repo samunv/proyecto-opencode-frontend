@@ -3,11 +3,15 @@ export class InterfazUsuario {
         this.cargador = document.getElementById('cargador');
         this.contenedorResultados = document.getElementById('contenedor-resultados');
         this.contenedorMensajes = document.getElementById('mensaje');
+        this.estadoVacio = document.getElementById('estado-vacio');
         this._actualizarIconos();
     }
 
     /** Muestra el spinner de carga (Obligatorio por regla de negocio) */
     mostrarCargador() {
+        if (this.estadoVacio) {
+            this.estadoVacio.classList.add('oculto');
+        }
         this.cargador.classList.remove('oculto');
         this.ocultarMensaje();
     }
