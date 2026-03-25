@@ -32,38 +32,28 @@
     min-height: 250px;
     padding: var(--espaciado-4);
     text-align: center;
-    background: linear-gradient(135deg, var(--color-surface) 0%, var(--color-bg) 100%);
+    background-color: var(--color-surface);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     position: relative;
     overflow: hidden;
     z-index: 1;
 }
 
-.slide-carrusel::before,
-.slide-carrusel::after {
-    content: '';
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(60px);
-    z-index: -1;
-    opacity: 0.6;
-    pointer-events: none;
+.slide-fondo-1 {
+    background-image: linear-gradient(to bottom, rgba(15, 15, 15, 0.8) 0%, rgba(15, 15, 15, 0.9) 100%), url('https://images.gr-assets.com/misc/1708023069-1708023069_goodreads_misc.png');
 }
 
-.slide-carrusel::before {
-    width: 200px;
-    height: 200px;
-    background-color: var(--color-primary-alpha);
-    top: -50px;
-    left: -50px;
+.slide-fondo-2 {
+    background-image: linear-gradient(to bottom, rgba(15, 15, 15, 0.8) 0%, rgba(15, 15, 15, 0.9) 100%), url('https://static.nationalgeographicla.com/files/styles/image_3200/public/006-library-biblioteca-angelica-a-roma_0002.jpg?w=1600&h=1283');
 }
 
-.slide-carrusel::after {
-    width: 150px;
-    height: 150px;
-    background-color: var(--color-primary-glow);
-    bottom: -50px;
-    right: -50px;
+.slide-fondo-3 {
+    background-image: linear-gradient(to bottom, rgba(15, 15, 15, 0.8) 0%, rgba(15, 15, 15, 0.9) 100%), url('https://images.theconversation.com/files/45159/original/rptgtpxd-1396254731.jpg?ixlib=rb-4.1.0&q=45&auto=format&w=1356&h=668&fit=crop');
 }
+
+
 
 .slide-contenido {
     display: flex;
@@ -88,17 +78,18 @@
 }
 
 .titulo-slide {
-    font-size: 1.5rem;
+    font-size: 1.7rem;
     color: var(--color-text);
     margin: 0;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
 }
 
 .texto-slide {
     font-size: 1rem;
-    color: var(--color-text-muted);
+    color: rgba(240, 240, 240, 0.9);
     font-weight: 300;
     margin: 0;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
 }
 
 /* Personalización de Swiper */
@@ -112,7 +103,7 @@
 
 .swiper-button-next,
 .swiper-button-prev {
-    color: var(--color-primary) !important;
+    color: white !important;
 }
 
 .swiper-button-next::after,
@@ -199,5 +190,61 @@
     .cuadricula-caracteristicas {
         grid-template-columns: repeat(3, 1fr);
         gap: var(--espaciado-4);
+    }
+}
+
+/* =========================================
+   Componentes de Cabecera
+   ========================================= */
+.input-busqueda {
+    flex: 1;
+}
+
+.btn-favoritos {
+    display: flex;
+    align-items: center;
+    gap: var(--espaciado-1);
+    padding: var(--espaciado-2);
+    background-color: transparent;
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radio-boton);
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.btn-favoritos:hover {
+    background-color: var(--color-surface-hover);
+    color: var(--color-primary);
+    border-color: var(--color-primary);
+}
+
+.btn-favoritos i {
+    width: 20px;
+    height: 20px;
+}
+
+.texto-oculto-movil {
+    display: none;
+}
+
+.btn-buscar {
+    padding: var(--espaciado-2);
+}
+
+@media (min-width: 768px) {
+    .texto-oculto-movil {
+        display: inline;
+    }
+    
+    .btn-favoritos {
+        padding: var(--espaciado-2) var(--espaciado-3);
+    }
+
+    .btn-buscar {
+        padding: var(--espaciado-2) var(--espaciado-3);
     }
 }

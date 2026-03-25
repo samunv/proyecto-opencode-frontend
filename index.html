@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net https://unpkg.com; img-src 'self' https://covers.openlibrary.org https://via.placeholder.com; connect-src 'self' https://openlibrary.org; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com;">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net https://unpkg.com; img-src 'self' https://covers.openlibrary.org https://via.placeholder.com https://images.gr-assets.com https://static.nationalgeographicla.com https://images.theconversation.com; connect-src 'self' https://openlibrary.org; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com;">
     <title>Buscador de Libros | Encuentra tu próxima lectura</title>
     <meta name="description" content="Explora millones de títulos en nuestra base de datos literaria. Encuentra tus libros favoritos, descubre nuevos autores y crea tu biblioteca digital.">
     <meta property="og:title" content="Buscador de Libros | Encuentra tu próxima lectura">
@@ -25,8 +25,14 @@
             <form id="formulario-busqueda" class="formulario">
                 <label for="input-busqueda" class="sr-only">Buscar por título o autor</label>
                 <input type="text" id="input-busqueda" class="input-busqueda" placeholder="Buscar por título, autor..." required>
-                <button type="submit" class="btn-buscar"><i data-lucide="search" aria-hidden="true"></i> Buscar</button>
+                <button type="submit" class="btn-buscar"><i data-lucide="search" aria-hidden="true"></i> <span class="texto-oculto-movil">Buscar</span></button>
             </form>
+            <div class="acciones-usuario">
+                <button class="btn-favoritos" aria-label="Mis Favoritos">
+                    <i data-lucide="bookmark" aria-hidden="true"></i>
+                    <span class="texto-oculto-movil">Favoritos</span>
+                </button>
+            </div>
         </div>
     </header>
 
@@ -34,21 +40,21 @@
         <section id="estado-vacio" class="estado-vacio" aria-label="Bienvenida y características">
             <div class="swiper carrusel-inicio">
                 <div class="swiper-wrapper">
-                    <div class="swiper-slide slide-carrusel">
+                    <div class="swiper-slide slide-carrusel slide-fondo-1">
                         <div class="slide-contenido">
                             <i data-lucide="book-heart" class="icono-slide" aria-hidden="true"></i>
                             <h2 class="titulo-slide">Encuentra tus libros favoritos</h2>
                             <p class="texto-slide">Explora millones de títulos en nuestra base de datos.</p>
                         </div>
                     </div>
-                    <div class="swiper-slide slide-carrusel">
+                    <div class="swiper-slide slide-carrusel slide-fondo-2">
                         <div class="slide-contenido">
                             <i data-lucide="compass" class="icono-slide" aria-hidden="true"></i>
                             <h2 class="titulo-slide">Explora nuevos autores</h2>
                             <p class="texto-slide">Descubre joyas literarias y amplía tus horizontes.</p>
                         </div>
                     </div>
-                    <div class="swiper-slide slide-carrusel">
+                    <div class="swiper-slide slide-carrusel slide-fondo-3">
                         <div class="slide-contenido">
                             <i data-lucide="library" class="icono-slide" aria-hidden="true"></i>
                             <h2 class="titulo-slide">Tu biblioteca digital</h2>
