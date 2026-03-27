@@ -10,6 +10,20 @@
     <meta property="og:description" content="Explora millones de títulos en nuestra base de datos literaria. Encuentra tus libros favoritos y descubre nuevos autores.">
     <meta property="og:type" content="website">
     <meta property="og:image" content="https://via.placeholder.com/1200x630.png?text=Buscador+de+Libros">
+    <link rel="canonical" href="https://samunv.github.io/proyecto-opencode-frontend/">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="Álvaro Oviedo y Samuel Navasardyan">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Buscador de Libros",
+        "description": "Explora millones de títulos en nuestra base de datos literaria.",
+        "applicationCategory": "ReferenceApplication",
+        "operatingSystem": "Web",
+        "offers": { "@type": "Offer", "price": "0" }
+    }
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;600;900&display=swap" rel="stylesheet">
@@ -31,6 +45,7 @@
                 <button class="btn-favoritos" aria-label="Mis Favoritos">
                     <i data-lucide="bookmark" aria-hidden="true"></i>
                     <span class="texto-oculto-movil">Favoritos</span>
+                    <span id="contador-favoritos" class="contador-badge oculto" aria-live="polite">0</span>
                 </button>
             </div>
         </div>
@@ -95,7 +110,19 @@
         <div id="cargador" class="cargador oculto" role="status" aria-label="Cargando resultados..."></div>
         <div id="mensaje" class="mensaje oculto" role="alert" aria-live="assertive"></div>
         <section id="contenedor-resultados" class="grid-resultados" aria-label="Resultados de búsqueda"></section>
+        <div id="barra-metricas" class="barra-metricas oculto" role="status" aria-label="Métricas de rendimiento"></div>
     </main>
+
+    <footer class="pie-pagina">
+        <p>&copy; 2026 Buscador de Libros &mdash; Datos de <a href="https://openlibrary.org" target="_blank" rel="noopener noreferrer">OpenLibrary</a></p>
+    </footer>
+
+    <footer class="pie-pagina" role="contentinfo">
+        <div class="pie-contenedor">
+            <p class="pie-texto">&copy; 2025 Buscador de Libros — Datos proporcionados por <a href="https://openlibrary.org" target="_blank" rel="noopener noreferrer" class="pie-enlace">OpenLibrary</a></p>
+            <p class="pie-creditos">Desarrollado con <i data-lucide="code-2" aria-hidden="true"></i> y agentes de IA</p>
+        </div>
+    </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
