@@ -17,9 +17,7 @@ export class InterfazUsuario {
      * Muestra el spinner de carga (Obligatorio por regla de negocio)
      */
     mostrarCargador() {
-        if (this.estadoVacio) {
-            this.estadoVacio.classList.add('oculto');
-        }
+        this.ocultarEstadoVacio();
         this.cargador.classList.remove('oculto');
         this.ocultarMensaje();
     }
@@ -29,6 +27,26 @@ export class InterfazUsuario {
      */
     ocultarCargador() {
         this.cargador.classList.add('oculto');
+    }
+
+    /**
+     * Oculta la sección de estado vacío (carrusel y características)
+     */
+    ocultarEstadoVacio() {
+        if (this.estadoVacio) {
+            this.estadoVacio.classList.add('oculto');
+        }
+    }
+
+    /**
+     * Muestra la sección de estado vacío
+     */
+    mostrarEstadoVacio() {
+        if (this.estadoVacio) {
+            this.estadoVacio.classList.remove('oculto');
+        }
+        this.limpiarResultados();
+        this.ocultarMensaje();
     }
 
     /**
@@ -46,10 +64,11 @@ export class InterfazUsuario {
     mostrarMensaje(texto, esError = false) {
         const icono = esError ? 'alert-circle' : 'info';
         this.contenedorMensajes.innerHTML = '';
+
         const iconElement = document.createElement('i');
         iconElement.dataset.lucide = icono;
         this.contenedorMensajes.appendChild(iconElement);
-        
+
         const spanText = document.createElement('span');
         spanText.textContent = texto;
         this.contenedorMensajes.appendChild(spanText);
@@ -67,44 +86,95 @@ export class InterfazUsuario {
 
     /**
      * Recibe un array de objetos Libro y los inyecta en el DOM
-     * @param {Libro[]} libros Array de instancias de la clase Libro
+     * @param {Array} libros Array de instancias de la clase Libro
+     * @param {Object} gestorFavoritos Instancia del gestor de favoritos
+     * @param {Function} callbackFavorito Función a ejecutar al pulsar favorito
      */
-    renderizarLibros(libros) {
+    renderizarLibros(libros, gestorFavoritos, callbackFavorito) {
         this.limpiarResultados();
-        
+        this.ocultarEstadoVacio();
+
         if (libros.length === 0) {
             this.mostrarMensaje('No se encontraron libros. Intenta otra búsqueda.');
             return;
         }
 
-        const fragmentoHTML = this._crearFragmentoTarjetas(libros);
+        const fragmentoHTML = this._crearFragmentoTarjetas(libros, gestorFavoritos, callbackFavorito);
         this.contenedorResultados.appendChild(fragmentoHTML);
         this._actualizarIconos(this.contenedorResultados);
     }
 
     /**
+     * Actualiza el contador visual del botón de favoritos
+     * @param {number} cantidad Número de favoritos
+     */
+    actualizarContadorFavoritos(cantidad) {
+        const btnFavoritos = document.querySelector('.btn-favoritos');
+        let contador = btnFavoritos.querySelector('.contador-favoritos');
+
+        if (cantidad > 0) {
+            if (!contador) {
+                contador = document.createElement('span');
+                contador.className = 'contador-favoritos';
+                btnFavoritos.appendChild(contador);
+            }
+            contador.textContent = cantidad;
+        } else if (contador) {
+            contador.remove();
+        }
+    }
+
+    /**
+     * Actualiza el icono del botón de favorito en una tarjeta
+     * @param {string} titulo Título del libro
+     * @param {boolean} esFavorito Si está marcado como favorito
+     */
+    actualizarBotonFavorito(titulo, esFavorito) {
+        const tarjetas = this.contenedorResultados.querySelectorAll('.tarjeta-libro');
+
+        tarjetas.forEach(tarjeta => {
+            const tituloTarjeta = tarjeta.querySelector('.titulo-libro');
+            if (tituloTarjeta && tituloTarjeta.textContent === titulo) {
+                const btnFav = tarjeta.querySelector('.btn-fav-tarjeta');
+                if (btnFav) {
+                    btnFav.classList.toggle('activo', esFavorito);
+                    const iconoFav = btnFav.querySelector('i');
+                    if (iconoFav) {
+                        iconoFav.dataset.lucide = esFavorito ? 'heart' : 'heart';
+                    }
+                    this._actualizarIconos(btnFav);
+                }
+            }
+        });
+    }
+
+    /**
      * Construye las tarjetas evitando reflows en cada iteración
-     * @param {Libro[]} libros Array de datos
+     * @param {Array} libros Array de datos
+     * @param {Object} gestorFavoritos Instancia del gestor de favoritos
+     * @param {Function} callbackFavorito Función callback para favoritos
      * @returns {DocumentFragment} Elemento DOM listo para inyectar
      */
-    _crearFragmentoTarjetas(libros) {
+    _crearFragmentoTarjetas(libros, gestorFavoritos, callbackFavorito) {
         const fragmento = document.createDocumentFragment();
-        
+
         libros.forEach(libro => {
-            const tarjeta = this._construirHTMLTarjeta(libro);
+            const esFav = gestorFavoritos ? gestorFavoritos.esFavorito(libro.titulo) : false;
+            const tarjeta = this._construirHTMLTarjeta(libro, esFav, callbackFavorito);
             fragmento.appendChild(tarjeta);
         });
-        
+
         return fragmento;
     }
 
     /**
-     * Construye el HTML individual de una tarjeta
-     * Función corta de responsabilidad única
-     * @param {Libro} libro Modelo de datos
-     * @returns {HTMLElement} Div de la tarjeta
+     * Construye el HTML individual de una tarjeta con botón de favorito
+     * @param {Object} libro Modelo de datos
+     * @param {boolean} esFavorito Si está en favoritos
+     * @param {Function} callbackFavorito Función callback
+     * @returns {HTMLElement} Article de la tarjeta
      */
-    _construirHTMLTarjeta(libro) {
+    _construirHTMLTarjeta(libro, esFavorito, callbackFavorito) {
         const div = document.createElement('article');
         div.className = 'tarjeta-libro';
 
@@ -136,6 +206,23 @@ export class InterfazUsuario {
         spanAnio.appendChild(iconoAnio);
         spanAnio.appendChild(document.createTextNode(` ${libro.anioPublicacion}`));
         div.appendChild(spanAnio);
+
+        const btnFav = document.createElement('button');
+        btnFav.className = `btn-fav-tarjeta ${esFavorito ? 'activo' : ''}`;
+        btnFav.setAttribute('aria-label', esFavorito ? 'Eliminar de favoritos' : 'Añadir a favoritos');
+
+        const iconoFav = document.createElement('i');
+        iconoFav.dataset.lucide = 'heart';
+        btnFav.appendChild(iconoFav);
+
+        btnFav.addEventListener('click', (evento) => {
+            evento.stopPropagation();
+            if (callbackFavorito) {
+                callbackFavorito(libro);
+            }
+        });
+
+        div.appendChild(btnFav);
 
         return div;
     }

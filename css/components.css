@@ -248,3 +248,218 @@
         padding: var(--espaciado-2) var(--espaciado-3);
     }
 }
+
+/* =========================================
+   Botón Favorito en Tarjetas
+   ========================================= */
+.btn-fav-tarjeta {
+    position: absolute;
+    top: var(--espaciado-1);
+    right: var(--espaciado-1);
+    background: rgba(15, 15, 15, 0.7);
+    border: 1px solid var(--color-border);
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--color-text-muted);
+    transition: color 0.2s ease, background-color 0.2s ease, transform 0.15s ease;
+}
+
+.btn-fav-tarjeta:hover {
+    color: #e05c5c;
+    background: rgba(224, 92, 92, 0.15);
+    transform: scale(1.1);
+}
+
+.btn-fav-tarjeta.activo {
+    color: #e05c5c;
+    background: rgba(224, 92, 92, 0.2);
+}
+
+.btn-fav-tarjeta svg {
+    width: 18px;
+    height: 18px;
+}
+
+.tarjeta-libro {
+    position: relative;
+}
+
+/* Contador de Favoritos */
+.contador-favoritos {
+    background-color: var(--color-primary);
+    color: var(--color-bg);
+    font-size: 0.7rem;
+    font-weight: 900;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 4px;
+}
+
+/* =========================================
+   Footer
+   ========================================= */
+.pie-pagina {
+    background-color: var(--color-surface);
+    border-top: 1px solid var(--color-border);
+    padding: var(--espaciado-3) var(--espaciado-2);
+    margin-top: var(--espaciado-6);
+    text-align: center;
+}
+
+.pie-contenedor {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: var(--espaciado-1);
+}
+
+.pie-texto {
+    color: var(--color-text-muted);
+    font-size: 0.8rem;
+    font-weight: 300;
+}
+
+.pie-enlace {
+    color: var(--color-primary);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.pie-enlace:hover {
+    color: var(--color-primary-hover);
+    text-decoration: underline;
+}
+
+.pie-creditos {
+    color: var(--color-text-muted);
+    font-size: 0.75rem;
+    font-weight: 300;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+}
+
+.pie-creditos svg {
+    width: 14px;
+    height: 14px;
+}
+
+/* =========================================
+   Botón Favorito en Tarjeta
+   ========================================= */
+.btn-fav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1px solid var(--color-border);
+    background-color: transparent;
+    color: var(--color-text-muted);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-top: var(--espaciado-2);
+}
+
+.btn-fav:hover {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+    background-color: var(--color-primary-alpha);
+}
+
+.btn-fav--activo {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+    background-color: var(--color-primary-alpha);
+}
+
+.btn-fav svg {
+    width: 18px;
+    height: 18px;
+}
+
+.btn-fav--activo svg {
+    fill: var(--color-primary);
+}
+
+/* =========================================
+   Contador Badge Favoritos
+   ========================================= */
+.contador-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 20px;
+    height: 20px;
+    padding: 0 6px;
+    border-radius: 10px;
+    background-color: var(--color-primary);
+    color: var(--color-bg);
+    font-size: 0.7rem;
+    font-weight: 900;
+    line-height: 1;
+}
+
+/* =========================================
+   Barra de Métricas
+   ========================================= */
+.barra-metricas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--espaciado-3);
+    justify-content: center;
+    padding: var(--espaciado-2) var(--espaciado-3);
+    margin-top: var(--espaciado-4);
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radio-tarjeta);
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    font-weight: 300;
+}
+
+.metrica-item {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.metrica-item svg {
+    width: 14px;
+    height: 14px;
+    color: var(--color-primary);
+}
+
+/* =========================================
+   Footer
+   ========================================= */
+.pie-pagina {
+    text-align: center;
+    padding: var(--espaciado-4) var(--espaciado-2);
+    margin-top: var(--espaciado-6);
+    border-top: 1px solid var(--color-border);
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    font-weight: 300;
+}
+
+.pie-pagina a {
+    color: var(--color-primary);
+    text-decoration: none;
+}
+
+.pie-pagina a:hover {
+    text-decoration: underline;
+}
